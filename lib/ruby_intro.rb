@@ -71,5 +71,27 @@ end
 # Part 3
 
 class BookInStock
-# YOUR CODE HERE
+	attr_reader :isbn, :price
+	def isbn=(isbn)
+		if isbn =~ /[^0-9\-]/ or isbn.length==0
+			raise ArgumentError.new('Invalid ISBN.')
+		else
+			@isbn = isbn
+		end
+	end
+	def price=(price)
+		if price<=0
+			raise ArgumentError.new('Invalid price.')
+		else
+			@price = price
+		end
+	end
+	def initialize(isbn="00-00", price=0)
+		self.isbn = isbn
+		self.price = price
+	end
+
+	def price_as_string
+		return "$#{'%.2f' % price}"
+	end
 end
